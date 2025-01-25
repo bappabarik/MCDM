@@ -9,10 +9,12 @@ export const parseExcel = (filePath) => {
   const workbook = xlsx.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+  console.log(data);
+  
 
-  const criteria = Object.keys(data[0]).filter((key) => key !== "Name");
+  const criteria = Object.keys(data[0]).slice(1);
   const alternatives = data.map((row) => ({
-    name: row.Name,
+    name: row[0],
     values: criteria.map((criterion) => parseFloat(row[criterion])),
   }));
 
