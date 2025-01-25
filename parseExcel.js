@@ -12,7 +12,7 @@ export const parseExcel = (filePath) => {
 
   const criteria = Object.keys(data[0]).slice(1);
   const alternatives = data.map((row) => ({
-    name: row[0],
+    name: row[Object.keys(row)[0]],
     values: criteria.map((criterion) => parseFloat(row[criterion])),
   }));
 
